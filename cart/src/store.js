@@ -36,11 +36,14 @@ const store = new Vuex.Store({
       if (item.c > 1) {
         item.c--
       }
+    },
+    setToken(state, payload) {
+      state.token = payload ? payload : ''
     }
   },
   getters: {
     count: state => {
-      return state.cart.reduce((sum, o) => sum + o.c, 0)
+      return state.cart ? state.cart.reduce((sum, o) => sum + o.c, 0) : 0
     }
   },
   actions: {
@@ -49,16 +52,22 @@ const store = new Vuex.Store({
     },
     decrease({ commit }, payload) {
       commit('decrease', payload)
+    },
+    setToken({ commit }, payload) {
+      commit('setToken', payload)
     }
   },
 })
 try {
   let cart = JSON.parse(localStorage.getItem('cart'))
+  let token = sessionStorage.getItem('token')
   store.state.cart = cart
+  store.state.token = token
 } catch (error) {
   throw error
 }
 store.subscribe((mutation, state) => {
   window.localStorage.setItem('cart', JSON.stringify(state.cart))
+  window.sessionStorage.setItem('token', state.cart)
 })
 export default store

@@ -1,5 +1,6 @@
 <template>
   <div class="login">
+    <KHeader title="登陆"></KHeader>
     <cube-form
   :model="model"
   :schema="schema"
@@ -72,7 +73,9 @@ export default {
     validateHandler(result) {
       this.axios.post("/api/login", this.model).then(res => {
         if (res.data.code !== 0) return;
-        window.sessionStorage.setItem("token", res.data.token);
+        const { token } = res.data;
+        this.$store.dispatch("setToken", token);
+        window.sessionStorage.setItem("token", token);
         this.$router.push({ name: "home" });
       });
     }

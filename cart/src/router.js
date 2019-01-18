@@ -1,17 +1,23 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import Home from './views/home.vue'
+import History from '@/assets/history.js'
+
 
 Vue.use(Router)
+Vue.use(History)
 
-export default new Router({
+Router.prototype.goBack = function () {
+  this.isBack = true
+  this.back()
+}
+const router = new Router({
   mode: 'history',
   base: process.env.BASE_URL,
   routes: [
     {
       path: '/',
       name: 'home',
-      component: Home
+      component: () => import('./views/home.vue')
     },
     {
       path: '/cart',
@@ -26,10 +32,7 @@ export default new Router({
     {
       path: '/about',
       name: 'about',
-      // route level code-splitting
-      // this generates a separate chunk (about.[hash].js) for this route
-      // which is lazy-loaded when the route is visited.
-      component: () => import(/* webpackChunkName: "about" */ './views/about.vue')
+      component: () => import('./views/about.vue')
     },
     {
       path: '/login',
@@ -38,3 +41,13 @@ export default new Router({
     },
   ]
 })
+
+router.afterEach((to, from) => {
+  if (router.isBack) {
+    router.isBack = false
+    History.pop()
+  } else {
+    History.push(to.name)
+  }
+})
+export default router

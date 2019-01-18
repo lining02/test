@@ -1,5 +1,6 @@
 <template>
   <div class="home">
+    <KHeader title="主页"></KHeader>
     <cube-slide :data="items" :interval="1000" class="slide"/>
     <cube-button @click="showDrawer">Show Drawer</cube-button>
     <cube-scroll>
@@ -10,7 +11,6 @@
           <div>
             <i class="cubeic-add" @click.stop.prevent="addCart(o)"></i>
             <span>¥{{o.price}}</span>
-            
           </div>
           <div><span>{{o.count}} 人购买</span></div>
        </div>
@@ -26,9 +26,6 @@
 </template>
 
 <script>
-// @ is an alias to /src
-import HelloWorld from "@/components/HelloWorld.vue";
-
 export default {
   name: "home",
   data() {
@@ -57,9 +54,7 @@ export default {
       filterGoods: []
     };
   },
-  components: {
-    HelloWorld
-  },
+  components: {},
   methods: {
     getDate() {
       this.axios("/api/goods").then(res => {

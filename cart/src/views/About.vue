@@ -1,5 +1,6 @@
 <template>
   <div class="about">
+    <KHeader title="我的"></KHeader>
     <cube-scroll>
       <cube-swipe
           @item-click="onItemClick"
@@ -42,7 +43,12 @@ export default {
             active: 0,
             data: [{ content: "退出登陆" }],
             onSelect: () => {
-              this.axios("/api/logout").then(res => {});
+              this.axios("/api/logout").then(res => {
+                if (res.data.code === -1) {
+                  this.$store.dispatch("setToken", "");
+                  window.sessionStorage.removeItem("token");
+                }
+              });
             }
           }).show();
 

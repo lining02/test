@@ -1,5 +1,6 @@
 <template>
   <div class="about">
+    <KHeader title="购物车"></KHeader>
     <div v-for="o in cart" :key="o.id" class="item">
       <!-- <img :src="o.img" alt="">
       <div>
@@ -39,7 +40,7 @@ export default {
   },
   computed: {
     cart() {
-      return this.$store.state.cart;
+      return this.$store.state.cart || [];
     },
     sum() {
       let s = this.cart.reduce((sum, o) => {
