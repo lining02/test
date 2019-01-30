@@ -3,13 +3,14 @@
     <KHeader title="主页"></KHeader>
     <cube-slide :data="items" :interval="1000" class="slide"/>
     <cube-button @click="showDrawer">Show Drawer</cube-button>
+    <ball :ball="ball" @transitionend="ball.show=false"></ball>
     <cube-scroll>
       <div v-for="o in filterGoods" :key="o.title" class="item">
         <img :src="o.img" alt="">
        <div class="wrap">
           <span>{{o.title}}</span>
           <div>
-            <i class="cubeic-add" @click.stop.prevent="addCart(o)"></i>
+            <i class="cubeic-add" @click.stop.prevent="(e)=>addCart(e, o)"></i>
             <span>¥{{o.price}}</span>
           </div>
           <div><span>{{o.count}} 人购买</span></div>
@@ -26,10 +27,13 @@
 </template>
 
 <script>
+import ball from "@/components/common/ball";
+import notice from "@/components/common/notice";
 export default {
   name: "home",
   data() {
     return {
+      ball: { show: false, el: null },
       items: [
         {
           url: "http://www.didichuxing.com/",
@@ -54,7 +58,7 @@ export default {
       filterGoods: []
     };
   },
-  components: {},
+  components: { ball },
   methods: {
     getDate() {
       this.axios("/api/goods").then(res => {
@@ -78,13 +82,28 @@ export default {
         }
       }
     },
-    addCart(o) {
+    addCart(e, o) {
+      // this.cubeNotice(o.title);
+      // @/servers/notice.js的方法
+      this.$notice.info({
+        content: o.title
+      });
+
+      this.ball = {
+        show: true,
+        el: e.target
+      };
       this.$store.dispatch("increment", o);
       this.$createToast({
         time: 1000,
         type: "correct",
         txt: `${o.title}加入购物车`
       }).show();
+    },
+    // cube-ui createAPI的方法
+    cubeNotice(content = "lalal") {
+      const notice = this.$createNotice();
+      notice.add({ content, duration: 4 });
     }
   },
   computed: {},
