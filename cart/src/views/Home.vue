@@ -3,7 +3,8 @@
     <KHeader title="主页"></KHeader>
     <cube-slide :data="items" :interval="1000" class="slide"/>
     <cube-button @click="showDrawer">Show Drawer</cube-button>
-    <ball :ball="ball" @transitionend="ball.show=false"></ball>
+    <!-- ball 1. 组件 -->
+    <!-- <ball :ball="ballObj"></ball> -->
     <cube-scroll>
       <div v-for="o in filterGoods" :key="o.title" class="item">
         <img :src="o.img" alt="">
@@ -28,12 +29,15 @@
 
 <script>
 import ball from "@/components/common/ball";
+import ball1 from "@/components/common/ball1";
 import notice from "@/components/common/notice";
+import notice1 from "@/components/common/notice1";
+import create from "@/servers/create";
 export default {
   name: "home",
   data() {
     return {
-      ball: { show: false, el: null },
+      ballObj: { show: false, el: null },
       items: [
         {
           url: "http://www.didichuxing.com/",
@@ -83,16 +87,31 @@ export default {
       }
     },
     addCart(e, o) {
+      // 1. cube-ui createAPI的方法
       // this.cubeNotice(o.title);
-      // @/servers/notice.js的方法
-      this.$notice.info({
-        content: o.title
-      });
+      // 2. @/servers/notice.js的方法
+      // this.$notice.info({
+      //   content: o.title
+      // });
+      // 3.  @/servers/create.js的方法
+      const noticeanim = create(notice1, {content: o.title});
+      noticeanim.add({content: o.title});
+      noticeanim.$on('end', ()=>{
+        noticeanim.remove();
+      }) 
 
-      this.ball = {
+      // 组件ball 传值
+      this.ballObj = {
         show: true,
         el: e.target
       };
+      // ball 2. @/servers/create.js的方法 create ball
+       const ballanim = create(ball1, {el: e.target});
+      ballanim.start();
+      ballanim.$on('transitionend', ()=>{
+        ballanim.remove();
+      }) 
+      
       this.$store.dispatch("increment", o);
       this.$createToast({
         time: 1000,
@@ -100,7 +119,6 @@ export default {
         txt: `${o.title}加入购物车`
       }).show();
     },
-    // cube-ui createAPI的方法
     cubeNotice(content = "lalal") {
       const notice = this.$createNotice();
       notice.add({ content, duration: 4 });
