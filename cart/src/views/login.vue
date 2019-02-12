@@ -28,7 +28,8 @@ export default {
                 modelKey: "username",
                 label: "用户名",
                 props: {
-                  placeholder: "请输入用户名"
+                  placeholder: "请输入用户名",
+                  autocomplete: false
                 },
                 rules: {
                   required: true
@@ -41,7 +42,8 @@ export default {
                 label: "密码",
                 props: {
                   type: "password",
-                  placeholder: "请输入密码"
+                  placeholder: "请输入密码",
+                  autocomplete: false
                 },
                 rules: {
                   required: true
