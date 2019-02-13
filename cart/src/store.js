@@ -43,7 +43,7 @@ const store = new Vuex.Store({
   },
   getters: {
     count: state => {
-      return state.cart ? state.cart.reduce((sum, o) => sum + o.c, 0) : 0
+      return state.cart.reduce((sum, o) => sum + o.c, 0)
     }
   },
   actions: {
@@ -61,8 +61,8 @@ const store = new Vuex.Store({
 try {
   let cart = JSON.parse(localStorage.getItem('cart'))
   let token = sessionStorage.getItem('token')
-  store.state.cart = cart
-  store.state.token = token
+  store.state.cart = cart || []
+  store.state.token = token || ''
 } catch (error) {
   throw error
 }

@@ -1,7 +1,6 @@
 const History = {
     _history: [],
     push(o) {
-        console.log(this)
         this._history.push(o)
     },
     pop() {

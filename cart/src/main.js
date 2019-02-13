@@ -3,9 +3,14 @@ import './cube-ui'
 import App from './App.vue'
 import router from './router'
 import store from './store'
+import notice from '@/assets/notice.js'
 import axios from 'axios'
 import VueAxios from 'vue-axios'
 import KHeader from '@/components/common/header.vue'
+import KNotice from '@/components/common/notice.vue'
+import { createAPI } from 'cube-ui'
+
+createAPI(Vue, KNotice, true) // cube-ui自带的creteAPI
 Vue.config.productionTip = false
 Vue.use(VueAxios, axios)
 Vue.component('KHeader', KHeader)

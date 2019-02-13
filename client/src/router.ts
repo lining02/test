@@ -17,6 +17,10 @@ const router = new Router({
       path: '/home',
       name: 'home',
       component: () => import('./views/home/index.vue'),
+      beforeEnter: (to, from, next) => {
+        console.log('sssss')
+        next()
+      },
       children: [{
         path: 'home1',
         name: 'home1', 
@@ -47,5 +51,18 @@ const router = new Router({
   ]
 })
 
+router.beforeEach((to, from, next) => {
+  // ...
+  console.log('beforeEach')
+  if(to.name == 'f') {
+    next('/about')
+  } else {
+    next()
+  }
+})
 
+router.afterEach((to, from) => {
+  // ...
+  console.log('afterEach')
+})
 export default router;
