@@ -146,40 +146,6 @@ export default {
         }
       }
     },
-<<<<<<< .mine
-    // 添加购物车的回调， 显示动画
-    addCart(e) {
-      this.ball.show = true;
-      this.ball.el = e
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-=======
     addCart(e, o) {
       // 1. cube-ui createAPI的方法
       // this.cubeNotice(o.title);
@@ -212,7 +178,6 @@ export default {
         type: "correct",
         txt: `${o.title}加入购物车`
       }).show();
->>>>>>> .theirs
     },
     cubeNotice(content = "lalal") {
       const notice = this.$createNotice();
