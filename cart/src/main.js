@@ -3,17 +3,40 @@ import './cube-ui'
 import App from './App.vue'
 import router from './router'
 import store from './store'
+<<<<<<< .mine
 import notice from '@/assets/notice.js'
+=======
+// axios
+>>>>>>> .theirs
 import axios from 'axios'
 import VueAxios from 'vue-axios'
+Vue.use(VueAxios, axios)
+
+// cube-ui的createAPI的使用
+import { createAPI } from 'cube-ui'
+import Notice from '@/components/common/notice.vue'
+createAPI(Vue, Notice, true)
+
+// 自己写的CreteNotice
+import notice from '@/servers/notice.js'
+Vue.prototype.$notice = notice
+
+// 公共组件
 import KHeader from '@/components/common/header.vue'
+<<<<<<< .mine
 import KNotice from '@/components/common/notice.vue'
 import { createAPI } from 'cube-ui'
 
 createAPI(Vue, KNotice, true) // cube-ui自带的creteAPI
-Vue.config.productionTip = false
-Vue.use(VueAxios, axios)
+=======
 Vue.component('KHeader', KHeader)
+
+
+
+>>>>>>> .theirs
+Vue.config.productionTip = false
+
+// 拦截器
 axios.interceptors.request.use(
   config => {
     if (store.state.token) {  // 判断是否存在token，如果存在的话，则每个http header都加上token
@@ -24,8 +47,6 @@ axios.interceptors.request.use(
   err => {
     return Promise.reject(err);
   });
-
-// http response 拦截器
 axios.interceptors.response.use(
   response => {
     return response;

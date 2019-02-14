@@ -10,6 +10,7 @@ const store = new Vuex.Store({
   },
   mutations: {
     increment({ cart }, payload) {
+      console.log(cart)
       if (cart.length === 0) {
         cart.push(Object.assign({}, payload, { c: 1 }))
       }
@@ -67,7 +68,7 @@ try {
   throw error
 }
 store.subscribe((mutation, state) => {
-  window.localStorage.setItem('cart', JSON.stringify(state.cart))
-  window.sessionStorage.setItem('token', state.cart)
+  window.localStorage.setItem('cart', JSON.stringify(state.cart) || [])
+  window.sessionStorage.setItem('token', state.cart || '')
 })
 export default store
