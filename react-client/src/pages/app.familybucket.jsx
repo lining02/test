@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import Form from "../components/appfamilybucket/form";
-import KKKForm from "../components/appfamilybucket/kkkform";
-import KKForm from "../components/appfamilybucket/kkform";
+import Lnform from "../components/appfamilybucket/lnform";
 class App extends Component {
   constructor(props) {
     super(props);
@@ -12,8 +11,7 @@ class App extends Component {
     return (
       <div className="App">
         <Form />
-        <KKForm />
-        <KKKForm />
+        <Lnform />
       </div>
     );
   }

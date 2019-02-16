@@ -1,3 +1,4 @@
+// 及时更新当前时间
 import React, { Component } from 'react';
 class Time extends Component {
     constructor(props) {

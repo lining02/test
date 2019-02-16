@@ -141,6 +141,7 @@ class App extends Component {
     })
   }
   /**
+   * 生命周期的顺序
    * 父组件 componentWillMount
    * 
    * 父组件 render

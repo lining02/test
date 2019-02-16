@@ -9,7 +9,7 @@ export default class Commentlist extends Component {
   }
   // 组件已挂载
   componentDidMount() {
-    setInterval(() => {
+    this.timerId = setInterval(() => {
       this.setState({
         comments: [
           {
@@ -24,7 +24,9 @@ export default class Commentlist extends Component {
       });
     }, 1000);
   }
-
+  componentWillUnmount() {
+    clearTimeout(this.timerId)
+  }
   render() {
     let { comments } = this.state;
     return (
