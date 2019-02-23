@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
 import { Link, Route, Switch, Redirect } from "react-router-dom";
 import { connect } from "react-redux";
-import { login, asyncLogin, logout, asyncLogout } from '../../store/user.redux'
+// import { login, asyncLogin, logout, asyncLogout } from '../../store/user.redux.thunk'
+import { logout, asyncLogin } from '../../store/user.redux.saga'
 function Home({location}) {return (<div>Home的state参数是-{location.state ? location.state.course : '不存在'}</div>)}
 function About() {return (<div>About</div>)}
 function Detail({match, history}) {return (<div>
@@ -11,15 +12,13 @@ function Detail({match, history}) {return (<div>
 </div>)}
 @connect(
     state => ({ isLogin: state.user }), // 状态映射
-    { login, logout }
+    { logout, asyncLogin }
   )
   class Login extends Component {
     render() {
-        console.log(this.props)
-        const {login, logout, isLogin, location, history} = this.props
-        // isLogin && history.push({pathname: location.state || '/'});
+      const { logout, asyncLogin, isLogin, location, history} = this.props
       return (<div>
-          {!isLogin && <button onClick={()=>{login();history.push({pathname: location.state})}}>Login</button>}
+          {!isLogin && <button onClick={()=>{asyncLogin();history.push({pathname: location.state})}}>Login</button>}
           {isLogin && <button onClick={()=>logout()}>Logout</button>}
       </div>)
     }
@@ -28,7 +27,7 @@ function Detail({match, history}) {return (<div>
 // 路由守卫函数
 @connect(
     state => ({ isLogin: state.user }), // 状态映射
-    { login, asyncLogin, logout, asyncLogout }
+    {  logout }
   )
 class PrivateRoute extends Component {
    render() {
