@@ -9,4 +9,29 @@ module.exports = {
       '@': require('path').resolve(__dirname, 'src'),
     },
   },
+  module: {
+    rules: [{
+      test: /\.less$/,
+      use: [{
+        loader: 'style-loader' // creates style nodes from JS strings
+      }, {
+        loader: 'css-loader' // translates CSS into CommonJS
+      }, {
+        loader: 'less-loader', options: {
+          strictMath: true,
+          noIeCompat: true
+        }
+      }]
+    }]
+  },
+  routes: [
+    { path: '/', component: './a' },
+    { path: '/list', component: './b', Routes: ['./routes/PrivateRoute.js'] },
+    { path: '/users', component: './users/_layout',
+      routes: [
+        { path: '/users/detail', component: './users/detail' },
+        { path: '/users/:id', component: './users/id' }
+      ]
+    },
+  ],
 };
