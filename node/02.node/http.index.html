@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    Hello Word
+</body>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script>
+    // 浏览器链接为 http://localhost:3000/时
+    // 不跨域
+    axios.get('http://localhost:3000/list').then(res => {
+        console.log(res)
+    })
+    // 跨域
+    // axios.get('http://192.168.1.5:3000/list').then(res => {
+    //     console.log(res)
+    // })
+
+    // 1. jsonp
+    function addScriptTag(src) {
+        var script = document.createElement('script');
+        script.setAttribute('type', 'text/javascript');
+        script.src = src;
+        document.body.appendChild(script);
+    };
+    window.onload = function () {
+        addScriptTag('http://192.168.1.5:3000/list?callback=monkey');
+    };
+    function monkey(data) {
+        alert(data); // 没有返回 error
+    };
+
+    // 2. cors
+    axios.put('http://192.168.1.5:3000/cors', {message: 'put 请求'}, {
+        headers: {
+            'Authorization': 'Bearer ',
+        }
+    }).then(res => {
+        console.log(res)
+    })
+</script>
+
+</html>

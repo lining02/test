@@ -9,11 +9,12 @@
 <body>
     
 </body>
-<script src="./2.js"></script>
+<script src="./3.js"></script>
 <script>
-    const arr = [1,1,2,3,4,5,3,1, 'a', 'A']
-    console.log(_(arr).uniq(val => {
-        return typeof val === 'string' ? val.toLocaleLowerCase() : val
-    }))
+const arr = [1,1,2,3,4,5,3,1, 'a', 'A']
+console.log(_.chain(arr).uniq((val) => {
+    return typeof val === 'string' ? val.toLocaleLowerCase() : val
+}).value())
+
 </script>
 </html>

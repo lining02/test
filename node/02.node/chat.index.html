@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <input type="text">
+    <input type="button" value="发送">
+</body>
+<script>
+    let ws = new WebSocket('ws://localhost:3001')
+    const userInfo ={userId: Math.ceil(Math.random()*100)}
+    ws.onopen = (option => {
+        // 握手完成
+        console.log(option, '链接已打开...')
+    })
+    ws.onmessage = (option => {
+        document.querySelector("input[type='button']").onclick = function() {
+            console.log(option, '发送消息...') // option.data 是server发送给client的数据
+            let value = document.querySelector("input[type='text']").value
+            ws.send(JSON.stringify({...userInfo, value}))
+        }
+    })
+    ws.onerror = (option => {
+        console.log(option, '发生错误...')
+    })
+    ws.onclose = (option => {
+        console.log(option, '链接已断开...')
+    })
+</script>
+
+</html>

@@ -14,7 +14,7 @@
         return result
     }
     _.reduce = () => {
-
+        console.log(11)
     }
     // arr=[uniq, reduce, each....]
     _.each = function(arr, callback) {
@@ -29,13 +29,28 @@
         }
         return result;
     }
+    _.chain = (obj) => {
+        var instance = _(obj)
+        instance._chain = true
+        return instance;
+    }
+    _.result = (instance, obj) => {
+        console.log(instance, obj)
+        return instance._chain ? _(obj).chain() : obj
+    }
+    _.prototype.value = function() {
+        console.log(this.wrap)
+        return this.wrap
+    }
     _.mixin = function(obj) {
         _.each(_.functions(obj), (key) => {
             var func = obj[key]
             obj.prototype[key] = function() {
                 const args = [this.wrap]
                 Array.prototype.push.call(args, arguments[0])
-               return func.apply(this, args)
+                console.log(args)
+
+               return _.result(this, func.apply(this, args))
             }
         })
     }

@@ -10,17 +10,7 @@ export default {
       dynamicImport: { webpackChunkName: true },
       title: 'umi',
       dll: true,
-      routes: {
-        exclude: [
-        
-          /models\//,
-          /services\//,
-          /model\.(t|j)sx?$/,
-          /service\.(t|j)sx?$/,
-        
-          /components\//,
-        ],
-      },
+      routes: []
     }],
   ],
 }
