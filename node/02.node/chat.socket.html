@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+
+<body>
+    <input type="text"><button>发送</button>
+    <ul></ul>
+</body>
+<script src="/socket.io/socket.io.js"></script>
+<script>
+    window.onload = function () {
+        var socket = io()
+        var btn = document.querySelector('button'),
+            input = document.querySelector('input');
+            ul = document.querySelector('ul');
+        btn.addEventListener('click', () => {
+            socket.emit('chat message',input.value);
+        })
+        socket.on('list', (list => {
+            // list.import { connect } from 'react-redux'
+            console.log(1, list)
+            let a = ''
+            JSON.parse(list).forEach(item => {
+                a+= `<li>${item}</li>`
+            })
+            ul.innerHTML = a;
+        }))
+    }
+</script>
+
+</html>
