@@ -1,0 +1,16 @@
+{
+  "name": "04.koa",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon app",
+    "release": "node scripts/release.js"
+  },
+  "author": "lining",
+  "license": "ISC",
+  "dependencies": {
+    "koa-router": "^7.4.0"
+  }
+}
