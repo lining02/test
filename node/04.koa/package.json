@@ -11,6 +11,10 @@
   "author": "lining",
   "license": "ISC",
   "dependencies": {
-    "koa-router": "^7.4.0"
+    "jsonwebtoken": "^8.5.0",
+    "koa-bodyparser": "^4.2.1",
+    "koa-router": "^7.4.0",
+    "koa-session": "^5.10.1",
+    "koa2-cors": "^2.0.6"
   }
 }
