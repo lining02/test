@@ -1,0 +1,34 @@
+<style>
+    p.web { color: blue }
+</style>
+
+<div>
+    
+    {{!-- HTML 转义 --}}
+    <p>
+        name: {{userInfo.name}},age: {{userInfo.age}}
+    </p>
+    {{!-- if 指令 --}}
+    {{#if author.website}}
+    <p class="web">存在author.website</p>
+    {{else}}
+    <p>不存在author.website</p>
+    {{/if}}
+
+    {{!-- unless 指令 --}}
+    {{#unless author.name}}
+    <p>存在author.name</p>
+    {{/unless}}
+
+    {{!-- each 指令 --}}
+    <ul>
+        {{#each posts}}
+        <li>{{name}}说今年是{{toDate birthday 'YYYYMMDD'}}</li>
+        {{/each}}
+    </ul>
+    {{!-- 块表达式 --}}
+    {{#author}}
+
+    {{/author}}
+
+</div>

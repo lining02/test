@@ -1,0 +1,9 @@
+{
+  "dependencies": {
+    "handlebars-helpers": "^0.10.0",
+    "koa": "^2.7.0",
+    "koa-hbs": "^1.0.0",
+    "koa-router": "^7.4.0",
+    "koa-static": "^5.0.0"
+  }
+}

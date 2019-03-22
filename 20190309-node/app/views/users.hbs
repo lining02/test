@@ -1,0 +1,27 @@
+{{!-- 移走到layout，在这里不起作用 --}}
+{{#contentFor 'style'}}
+<style>
+  p {
+    border: 1px solid #000;
+  }
+</style>
+{{/contentFor}}
+
+
+
+{{#if isCookie}}
+<p>第一次进入页面，并保存了cookie</p>
+{{else}}
+<p>从cookie取得值</p>
+{{/if}}
+<p>{{username}}</p>
+
+
+{{!-- 移走到layout，在这里不起作用 --}}
+{{#contentFor 'jquery1'}}
+<script>
+  $(function () {
+    console.log('content for jQuery')
+  })
+</script>
+{{/contentFor}}
