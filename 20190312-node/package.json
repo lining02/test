@@ -1,0 +1,6 @@
+{
+  "dependencies": {
+    "koa-router": "^7.4.0",
+    "koa-static": "^5.0.0"
+  }
+}

@@ -1,0 +1,8 @@
+{
+  "dependencies": {
+    "jsonwebtoken": "^8.5.1",
+    "koa-bodyparser": "^4.2.1",
+    "koa-jwt": "^3.5.1",
+    "koa-session": "^5.10.1"
+  }
+}

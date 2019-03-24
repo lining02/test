@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+    <style>
+        .login-form {
+            max-width: 300px;
+        }
+    </style>
+    <title>session 方式登陆</title>
+</head>
+
+<body>
+    <div id="app">
+        <el-form :model="userInfo" :rules="rules" ref="userInfo" label-width="100px" class="login-form">
+            <el-form-item label="用户名" prop="username">
+                <el-input v-model="userInfo.username"></el-input>
+            </el-form-item>
+            <el-form-item label="密码" prop="password">
+                <el-input v-model="userInfo.password"></el-input>
+            </el-form-item>
+            <el-form-item>
+                <el-button type="primary" title="token" @click="login('token')">登陆</el-button>
+                <el-button type="primary" title="session" @click="login('session')">登陆</el-button>
+            </el-form-item>
+            <el-form-item>
+                <el-button type="primary" title="token" @click="getList('token')">列表</el-button>
+                <el-button type="primary" title="session" @click="getList('session')">列表</el-button>
+            </el-form-item>
+            <el-form-item>
+                <el-button type="primary" title="github登陆">github登陆</el-button>
+            </el-form-item>
+        </el-form-item>
+        </el-form>
+    </div>
+</body>
+<script src="vue.js"></script>
+<script src="axios.min.js"></script>
+<script src="element.js"></script>
+<script>
+    var app = new Vue({
+        el: '#app',
+        data: {
+            userInfo: {
+                username: '',
+                password: ''
+            },
+            rules: {
+                username: [
+                    { required: true, message: '请输入用户名', trigger: 'blur' },
+                    { min: 3, max: 5, message: '长度在 3 到 5 个字符', trigger: 'blur' }
+                ],
+                password: [
+                    { required: true, message: '请输入密码', trigger: 'blur' },
+                    { min: 3, max: 5, message: '长度在 3 到 5 个字符', trigger: 'blur' }
+                ],
+            }
+        },
+        methods: {
+            login(type) {
+                this.$refs.userInfo.validate((valid) => {
+                    if(!valid) return;
+                    axios.post(`/api/${type}/login`, this.userInfo).then(response => {
+                        const { code, token } = response.data
+                        if(type === 'token' && code === '000' && token) {
+                            sessionStorage.setItem('token', token)
+                        }
+                    })
+                });
+            },
+            getList(type) {
+                let token = sessionStorage.getItem('token')
+                if(type === 'token' && token) {
+                    axios.defaults.headers.common["Authorization"] = "Bearer " + token;
+                }
+                axios.get(`/api/${type}/users`, this.userInfo).then(response => {
+                })
+            }
+        },
+    })
+</script>
+
+</html>
