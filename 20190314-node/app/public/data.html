@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+    <style>
+        .info {
+            max-width: 300px;
+        }
+    </style>
+    <title>测试接口</title>
+</head>
+<body>
+    <div id="app">
+        <el-form :model="info" :rules="rules" ref="info" label-width="100px" class="info">
+            <el-form-item label="类型" prop="method">
+            <el-select v-model="info.method" placeholder="请选择">
+              <el-option
+                v-for="item in options"
+                :key="item"
+                :label="item"
+                :value="item">
+              </el-option>
+            </el-select>
+          </el-form-item>
+          <el-form-item label="链接" prop="url">
+              <el-input v-model="info.url"></el-input>
+          </el-form-item>
+          <el-form-item>
+              <el-button type="primary" @click="getData">请求接口</el-button>
+          </el-form-item>
+        </el-form>
+        {{response}}
+    </div>
+</body>
+<script src="vue.js"></script>
+<script src="axios.min.js"></script>
+<script src="element.js"></script>
+<script>
+    var app = new Vue({
+        el: '#app',
+        data: {
+          info: {
+            method: '',
+            url: ''
+          },
+          options: ['GET', 'POST', 'PUT', 'DELETE'],
+          rules: {
+            method: [
+              { required: true, message: '请输入用户名', trigger: 'blur' },
+            ],
+            url: [
+              { required: true, message: '请输入用户名', trigger: 'blur' },
+            ]
+          },
+          response: {}
+        },
+        methods: {
+          getData() {
+            this.$refs.info.validate((valid) => {
+              if(!valid) return;
+              const { method, url } = this.info
+              axios.request({
+                method,
+                url
+              }).then(response => {
+                this.response = response.data
+              })
+            })
+            
+          }
+        },
+    })
+</script>
+</html>

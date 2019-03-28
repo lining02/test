@@ -1,0 +1,11 @@
+{
+  "dependencies": {
+    "koa": "^2.7.0",
+    "koa-bodyparser": "^4.2.1",
+    "koa-multer": "^1.0.2",
+    "koa-session": "^5.10.1",
+    "mysql": "^2.16.0",
+    "mysql2": "^1.6.5",
+    "trek-captcha": "^0.4.0"
+  }
+}
