@@ -10,6 +10,7 @@ module.exports =  (filepath = 'public') => {
         } catch (error) {
             console.log(error.message)
             ctx.body = '404 NOT FOUND'
+            await next()
         }
         await next()
     }

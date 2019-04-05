@@ -14,7 +14,6 @@ class KoaCopy {
         const server = http.createServer( async (req, res) => {
             const fn = await this.compose(this.middleware);
             const ctx = await this.createContext(req, res);
-            // console.log(111, req, res, 2222)
             await fn(ctx);
             await res.end(ctx.body)
         })
