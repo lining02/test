@@ -1,0 +1,14 @@
+{
+  "name": "20190321-cluster",
+  "version": "1.0.0",
+  "description": "1. cluster 模块\r 2. 文件上传至服务器\r     1. scp\r     ```\r     scp docker-compose.yml root@47.98.252.43:/root/source/ #文件\r     scp -r mini-01 root@47.98.252.43:/root/source/ #文件夹\r     ```\r     2. git\r     3. deploy插件 (debug)\r 3. pm2",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "log4js": "^4.1.0"
+  }
+}
