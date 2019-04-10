@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        const arr = [27, 68, 13, 17, 16] // Array.from(new Array(5)).map(o => {
+            // return Math.ceil(Math.random()*100)
+        // })
+        console.log(arr) // [27, 68, 13, 17, 16]
+        const merge = (left, right, result = []) => {
+            // console.log(left, right);
+            while (left.length > 0 && right.length > 0) {
+                if(left[0] > right[0]) {
+                    result.push(right.shift())
+                } else {
+                    result.push(left.shift())
+                }
+            }
+            return [...result, ...left, ...right]
+        }
+        const splitCode = arr => {
+            // console.log(arr) // [27, 68, 13, 17, 16]
+            if(arr.length < 2) return arr
+            var mid = Math.floor(arr.length / 2), // 5
+                left = arr.slice(0 ,mid), // [27, 68]
+                right = arr.slice(mid), // [ 13, 17, 16]
+                left1 = splitCode(left), // 27
+                right1 = splitCode(right) // 
+                result = merge(left1, right1)
+                console.log(result,left1, right1) 
+            return result
+        }
+        console.log(splitCode(arr))
+    </script>
+</body>
+</html>

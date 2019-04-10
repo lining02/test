@@ -21,3 +21,5 @@ yarn-error.log*
 *.njsproj
 *.sln
 *.sw*
+
+*test-201904-spider
