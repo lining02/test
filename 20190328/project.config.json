@@ -12,9 +12,9 @@
 		"autoAudits": false
 	},
 	"compileType": "miniprogram",
-	"libVersion": "2.0.4",
+	"libVersion": "2.6.5",
 	"appid": "wx897f541cd5ce6553",
-	"projectname": "20190328-xcx",
+	"projectname": "20190328",
 	"debugOptions": {
 		"hidedInDevtools": []
 	},
