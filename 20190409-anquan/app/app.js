@@ -38,10 +38,11 @@ const CONFIG = {
 app.use(session(CONFIG, app));
 
 router.get('/', async (ctx) => {
+    const res = await query('select * from Users')
     await ctx.render('index', {
         from: ctx.query.from,
         username: ctx.session.username,
-        text: ''
+        text: res[0].text
     });
 });
 router.get('/login', async (ctx) => {

