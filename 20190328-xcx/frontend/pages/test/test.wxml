@@ -1,0 +1,28 @@
+<!--index.wxml-->
+<view class="container">
+
+<!-- 登陆操作 -->
+ <view class="userinfo">
+    <button wx:if="{{!userInfo.nickName}}" open-type="getUserInfo" bindgetuserinfo="getUserInfo"> 获取头像昵称 </button>
+    <block wx:else>
+      <image class="userinfo-avatar" src="{{userInfo.avatarUrl}}" mode="cover"></image>
+      <text class="userinfo-nickname">{{userInfo.nickName}}</text>
+    </block>
+  </view>
+
+
+  <!-- 云函数，求和 -->
+  <button bindtap="sum"> 求和 </button>
+  
+  <!-- 数据库操作，新增商品 -->
+  <view class="section">
+    <input bindinput="setName" placeholder="商品名称" />
+    <button bindtap="addGood">添加商品</button>
+  </view>
+
+  <!-- 文件操作，上传图片 -->
+  <view class="section">
+     <button bindtap="upload" >上传图片</button>
+    <image src="{{uploadSrc}}" alt="" srcset="" ></image>
+  </view>
+</view>
