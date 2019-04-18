@@ -1,8 +1,14 @@
 import Taro, { Component } from '@tarojs/taro'
 import Index from './pages/index'
-
+import { Provider } from '@tarojs/mobx'
 import './app.scss'
 
+
+import counterStore from './store/counter'
+
+const store = {
+  counterStore
+}
 // 如果需要在 h5 环境中开启 React Devtools
 // 取消以下注释：
 // if (process.env.NODE_ENV !== 'production' && process.env.TARO_ENV === 'h5')  {
@@ -13,6 +19,7 @@ class App extends Component {
 
   config = {
     pages: [
+      'pages/about/about',
       'pages/index/index'
     ],
     window: {
@@ -35,7 +42,9 @@ class App extends Component {
   // 请勿修改此函数
   render () {
     return (
-      <Index />
+      <Provider store={store}>
+        <Index />
+      </Provider>
     )
   }
 }
