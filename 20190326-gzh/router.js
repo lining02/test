@@ -79,22 +79,22 @@ router.get('/getFollowers', async (ctx, next) => {
     ctx.body = await api.getFollowers()
 })
 router.get('/wxAuthorize', (ctx, next) => {
-    console.log(ctx.query, ctx.href)
     const state = ctx.query.id;
     const redirectUrl = ctx.href.replace('wxAuthorize', 'wxCallback');
     console.log('redirectUrl:', redirectUrl, state)
     const scope = 'snsapi_userinfo' //授权类型
+    console.log(redirectUrl)
     const url = auth.getAuthorizeURL(redirectUrl, state, scope)
     console.log('url:', url)
-   ctx.redirect(url)
+    ctx.redirect(url)
 })
 
 router.get('/wxCallback', async (ctx, next) => {
-    console.log(11111)
     const code = ctx.query.code
     console.log('wxCallback....', code)
     const token = await auth.getAccessToken(code);
-    const {access_token, openid} = token.data
+    var accessToken = token.data.access_token;
+    var openid = token.data.openid;
     ctx.redirect('/?openid=' + openid)
 })
 
